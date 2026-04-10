@@ -1,0 +1,608 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --wood-dark: #112716;
+  --wood-medium: #1a3821;
+  --brass-light: #e6c27a;
+  --brass-dark: #b8914b;
+  --paper-sepia: #f3ebdf;
+  --charcoal: #1f1f1f;
+  --steam-grey: #a8a8a8;
+  
+  --font-heading: 'Rye', serif;
+  --font-body: 'Lora', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--wood-dark);
+  color: var(--paper-sepia);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header & Nav */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(31, 20, 18, 0.95);
+  border-bottom: 2px solid var(--brass-dark);
+  z-index: 1000;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--brass-light);
+  text-decoration: none;
+  text-shadow: 2px 2px 4px #000;
+  letter-spacing: 2px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  color: var(--brass-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--brass-light);
+  transition: width 0.3s ease;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  background-image: linear-gradient(rgba(17, 39, 22, 0.7), rgba(17, 39, 22, 0.7)), url('assets/poster_logo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  color: var(--brass-light);
+  text-shadow: 4px 4px 10px #000;
+  margin-bottom: 1rem;
+  animation: fadeIn 1.2s ease-out;
+  letter-spacing: 3px;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  color: var(--paper-sepia);
+  text-shadow: 2px 2px 5px #000;
+  border-top: 1px solid var(--brass-dark);
+  border-bottom: 1px solid var(--brass-dark);
+  padding: 10px 0;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--brass-dark);
+  color: var(--wood-dark);
+  padding: 12px 30px;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  text-decoration: none;
+  border: 2px solid var(--brass-light);
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 0 4px 6px rgba(0,0,0,0.5);
+}
+
+.btn:hover {
+  background: var(--brass-light);
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1), 0 6px 12px rgba(0,0,0,0.6);
+}
+
+/* Section Common */
+section {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--brass-light);
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '❋';
+  display: block;
+  font-size: 1.5rem;
+  color: var(--brass-dark);
+  margin-top: 10px;
+}
+
+/* Menu Section */
+#menu {
+  background-color: var(--wood-medium);
+  border: 4px double var(--brass-dark);
+  padding: 4rem 2rem;
+  margin-top: 4rem;
+  border-radius: 10px;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.5);
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23b8914b' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.menu-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.menu-category h3 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--brass-light);
+  border-bottom: 2px solid var(--brass-dark);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.menu-item {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.menu-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
+.menu-item-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.menu-item-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted var(--steam-grey);
+  margin: 0 15px;
+  opacity: 0.5;
+}
+
+.menu-item-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--brass-light);
+}
+
+.menu-item-desc {
+  font-size: 0.9rem;
+  color: var(--steam-grey);
+  font-style: italic;
+}
+
+/* Events Section */
+#events .events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.event-card {
+  background: var(--paper-sepia);
+  color: var(--charcoal);
+  padding: 0; /* Changed to allow image to span width */
+  border-top: 10px solid var(--brass-dark);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  position: relative;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-card-content {
+  padding: 2rem;
+}
+
+.event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2px solid var(--brass-dark);
+}
+
+@media (max-width: 768px) {
+  .event-image {
+    height: 180px;
+  }
+}
+
+.event-card::before, .event-card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: var(--wood-dark);
+  border-radius: 50%;
+}
+.event-card::before {
+  left: -10px;
+}
+.event-card::after {
+  right: -10px;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+.event-date {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: #791a1a;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.event-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.event-desc {
+  font-size: 1rem;
+}
+
+/* Reservations Section */
+#reservations {
+  background: url('assets/pub_interior.png') center/cover fixed;
+  position: relative;
+}
+
+#reservations > * {
+  position: relative;
+  z-index: 2;
+}
+
+#reservations::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(31, 20, 18, 0.85);
+  z-index: 1;
+}
+
+.reservation-form {
+  background: var(--wood-medium);
+  padding: 3rem;
+  border: 2px solid var(--brass-dark);
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--brass-light);
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--brass-dark);
+  color: var(--paper-sepia);
+  font-family: var(--font-body);
+  border-radius: 4px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--brass-light);
+  box-shadow: 0 0 8px rgba(230, 194, 122, 0.3);
+}
+
+.reservation-form .btn {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Map Section */
+.map-container {
+  width: 100%;
+  height: 400px;
+  border-top: 5px solid var(--brass-dark);
+  background: var(--wood-dark);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  /* Adds a subtle vintage look to the Google Map */
+  filter: contrast(1.1) grayscale(0.5) sepia(0.3) hue-rotate(-10deg);
+}
+
+/* Footer & Location */
+footer {
+  background: #110a08;
+  padding: 4rem 2rem 2rem;
+  /* Removed border-top since map handles it */
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-info h4 {
+  font-family: var(--font-heading);
+  color: var(--brass-light);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-info p {
+  margin-bottom: 0.5rem;
+  color: var(--steam-grey);
+}
+
+.footer-copy {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: var(--steam-grey);
+  font-size: 0.9rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  /* Menu & Footer stack to single column */
+  .menu-container, .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hero text scales down */
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .hero p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  /* Nav wraps nicely */
+  nav ul {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+  header {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  /* Events - stack to single column, no minimum width */
+  #events .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Event cards - remove the decorative notch pseudo-elements on mobile */
+  .event-card {
+    margin: 0 0.5rem;
+  }
+  .event-card::before, .event-card::after {
+    display: none;
+  }
+
+  /* Section padding tightened */
+  section {
+    padding: 3rem 1rem;
+  }
+
+  /* Reservation form full width and less padding */
+  .reservation-form {
+    padding: 1.5rem 1rem;
+    margin: 0 0.5rem;
+  }
+
+  /* Map height reduced for mobile */
+  .map-container {
+    height: 250px;
+  }
+
+  /* Menu category font sizes */
+  .menu-category h3 {
+    font-size: 1.5rem;
+  }
+  .menu-item-title {
+    font-size: 0.95rem;
+  }
+  .menu-item-price {
+    font-size: 1rem;
+  }
+
+  /* Section title */
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* Extra small screens (phones under 480px) */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .menu-item-header {
+    flex-wrap: nowrap;
+  }
+  .menu-item-dots {
+    min-width: 20px;
+  }
+}
+
+/* Custom Notification Toast */
+#toast {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: var(--brass-dark);
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 16px;
+  position: fixed;
+  z-index: 10000;
+  left: 50%;
+  bottom: 30px;
+  font-size: 1.1rem;
+  font-family: var(--font-heading);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+#toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+/* Admin Specific */
+.admin-panel {
+  background: var(--paper-sepia);
+  color: var(--charcoal);
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 4rem auto;
+}
+.admin-panel h2 {
+  font-family: var(--font-heading);
+  color: #791a1a;
+  margin-bottom: 1rem;
+}
+.admin-panel .form-control {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+}
+.admin-event-list {
+  margin-top: 2rem;
+}
+.admin-event-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.admin-event-item button {
+  background: #791a1a;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
